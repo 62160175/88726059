@@ -1,0 +1,37 @@
+<script>
+    rn = Math.floor(Math.random()*100); //ค่าที่ถูกสุ่มมา
+    //document.write(rn)
+    //alert(rn);
+    function guess(){
+        num = document.getElementById('number')
+        hist = document.getElementById('hist')
+        result = document.getElementById('result')
+     //  alert(num.value)
+       hist.innerHTML += num.value +" "
+
+        if(num.value == rn){
+            result.innerHTML = "ถูกต้อง"
+        }
+        if(num.value < rn){
+            result.innerHTML = "น้อยไป"
+        }
+        if(num.value > rn){
+            result.innerHTML = "มากไป"
+        }
+
+    }
+    function startOver(){
+        num = document.getElementById('number').value=""
+        hist = document.getElementById('hist').innerHTML=""
+        result = document.getElementById('result').innerHTML=""
+        rn = Math.floor(Math.random()*100);
+    }
+
+</script>
+
+
+<input type="Integer" placeholder="?" id="number">
+<button onclick="guess()">Guess</button>
+<div id="hist"></div>
+<div id="result"></div>
+<button onclick="startOver()">Start Over</button>
