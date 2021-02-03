@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>newsong</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    max-width: none;
+    position: relative;
+    margin: auto;
+  }
+  body{
+    margin: 80px;
+    margin-top: 0px;
+  }
+
+  </style>
+  
+</head>
+<body align = center>
+    <div id="demo" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ul class="carousel-indicators" align = "center">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+      </ul>
+      
+      <!-- The slideshow -->
+      <div class="carousel-inner" align = "center">
+        <div class="carousel-item active">
+          <img src="1.jpg" alt="Los Angeles" width="1350" height="550">
+        </div>
+        <div class="carousel-item">
+          <img src="2.jpg" alt="Chicago" width="1350" height="550">
+        </div>
+        <div class="carousel-item">
+          <img src="3.jpg" alt="New York" width="1350" height="550">
+        </div>
+      </div>
+      
+      <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next" >
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+    
+    <b><font size ="5">เพิ่มเพลงใหม่</font></b>
+      <a href="searchsong.html" >[ค้นหาเพลง]</a></br></br>
+      <form>
+        <input type="text" class="form-control" placeholder="ชื่อเพลง" id="addsong"></br>
+        <input type="text" class="form-control" placeholder="ศิลปิน" id="artist"></br>
+        <textarea class="form-control" id="lyrics" placeholder="เนื้อเพลง" cols="30" rows="10"></textarea></br>
+        <button1 onclick="addsong();"class="btn btn-success" align = "center">Save</button1>
+        <input type="reset" value="Clear Form"class="btn btn-danger" align = "center">
+      </form>
+  <script>
+    var songs = JSON.parse(localStorage.getItem("songs"))
+        if(songs == null){
+            localStorage.setItem("songs",songs)
+            songs = [];
+        }
+    function addsong(){
+        ls = localStorage.getItem('songs');
+        if(ls === null){
+            songs = [];
+        }else{
+            songs = JSON.parse(ls);
+        }
+            data = [
+                namesong = document.getElementById('addsong').value,
+                artist = document.getElementById('artist').value,
+                lyrics = document.getElementById('lyrics').value
+            ];
+            songs.push(data);
+        
+        console.log(songs);
+        
+        localStorage.setItem('songs',JSON.stringify(songs));
+
+    }
+        var songs = JSON.parse(localStorage.getItem("songs"))
+        if(songs == null){
+            localStorage.setItem("songs",songs)
+            songs = [];
+        }
+  </script>
+</body>
+</html>

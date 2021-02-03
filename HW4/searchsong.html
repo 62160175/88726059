@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>searchsong</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    max-width: none;
+    position: relative;
+    margin: auto;
+  }
+  body{
+    margin: 80px;
+    margin-top: 0px;
+  }
+  </style>
+ 
+</head>
+<body>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators" align = "center">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner" align = "center">
+    <div class="carousel-item active">
+      <img src="1.jpg" alt="Los Angeles" width="1350" height="550">
+    </div>
+    <div class="carousel-item">
+      <img src="4.jpg" alt="Chicago" width="1350" height="550">
+    </div>
+    <div class="carousel-item">
+      <img src="3.jpg" alt="New York" width="1350" height="550">
+    </div>
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+  <b><font size ="5">ค้นหาเพลง</font></b>
+  <a href="newsong.html">[เพิ่มเพลงใหม่]</a><br>
+  <input type="text" class="form-control" placeholder="ชื่อเพลง" id="search"></br>
+  <button onclick="search();" class="btn btn-info">ค้นหา</button></br>
+
+
+    
+  <div id="disp"></div> 
+  <script>
+     var songs = JSON.parse(localStorage.getItem("songs"))
+        if(songs == null){
+            localStorage.setItem("songs",songs)
+            songs = [];
+        }
+    
+    function nl2br(str,is_xhtml){
+        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,'$1' + breakTag + '$2');
+    }
+    function search(){
+        txt = document.getElementById('search').value;
+        disp = document.getElementById('disp');
+        disp.innerHTML = "";
+        html = "";
+        cnt = 0;
+        for(i = 0;i < songs.length;i++){
+        if(songs[i][0].indexOf(txt) >= 0){
+          cnt++;
+          html += `
+          <div class="card">
+              <div class="card-body">
+              <h4 class="card-title">เพลง ${songs[i][0]}</h4>
+              <h4 class="card-title">ศิลปิน ${songs[i][1]}</h4>
+              <p class="card-text">${nl2br(songs[i][2])}</p>
+              </div>
+          </div>`;
+        }
+    }
+        if(cnt == 0){
+          disp.innerHTML = `
+          <div class="alert alert-danger">
+          <strong>ไม่พบเพลง </strong>${txt}
+          </div>`;
+        }else{
+          document.getElementById("disp").innerHTML = `
+          <div class="alert alert-success">
+            <strong>พบ</strong>${cnt} เพลง
+          </div>`;
+          document.getElementById("disp").innerHTML += html;
+        }
+        return false;
+
+    }
+  </script>
+
+</body>
+</html>
